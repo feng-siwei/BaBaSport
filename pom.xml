@@ -4,4 +4,17 @@
   <artifactId>BaBaSport</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
+  <modules>
+  	<module>BaBaSport-common</module>
+  	<module>BaBaSport-pojo</module>
+  	<module>BaBaSport-interface</module>
+  	<module>BaBaSport-console</module>
+  	<module>BaBaSport-portal</module>
+  	<module>BaBaSport-service-cms</module>
+  	<module>BaBaSport-service-cob</module>
+  	<module>BaBaSport-service-product</module>
+  	<module>BaBaSport-service-solr</module>
+  	<module>BaBaSport-dao</module>
+  	<module>BaBaSport-login</module>
+  </modules>
 </project>
