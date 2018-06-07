@@ -18,4 +18,11 @@
   	</dependency>
   </dependencies>
   
+  <!-- tomcat7 servlet-api -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jsp-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+  
 </project>
