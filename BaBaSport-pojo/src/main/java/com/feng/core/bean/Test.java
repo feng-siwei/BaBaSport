@@ -1,8 +1,14 @@
 package com.feng.core.bean;
 
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Date;
 
-public class Test {
+
+public class Test implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4886483382603029595L;
 	private Integer id;
 	private String name;
 	private Date birthday;

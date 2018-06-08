@@ -24,7 +24,7 @@ public class TestDaoTest {
 	public void testAdd() throws Exception{
 		com.feng.core.bean.Test test = new com.feng.core.bean.Test();
 		test.setName("测试数据");
-		test.setBirthday(new Date(0));
+//		test.setBirthday(new Date(0));
 		testDao.insertTest(test);
 	}
 	
@@ -32,7 +32,7 @@ public class TestDaoTest {
 	public void testAdd2() throws Exception{
 		com.feng.core.bean.Test test = new com.feng.core.bean.Test();
 		test.setName("测试数据2");
-		test.setBirthday(new Date(System.currentTimeMillis()));
+//		test.setBirthday(new Date(System.currentTimeMillis()));
 		testService.insertTest(test);
 	}
 	

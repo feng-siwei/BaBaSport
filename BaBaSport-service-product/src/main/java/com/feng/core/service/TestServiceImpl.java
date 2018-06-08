@@ -15,6 +15,6 @@ public class TestServiceImpl implements TestService {
 	
 	public void insertTest(Test test) {
 		testDao.insertTest(test);
-		throw new RuntimeException();
+//		throw new RuntimeException();
 	}
 }
