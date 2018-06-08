@@ -10,4 +10,8 @@ public interface BrandDao {
 	public List<Brand> selectBrandListByQuery(BrandQuery brandQuery); 
 	//查询符合条件的总条数
 	public Integer selectCount(BrandQuery brandQuery); 
+	/**
+	 * 通过ID查询
+	 */
+	public Brand selectBrandById(Long id);
 }

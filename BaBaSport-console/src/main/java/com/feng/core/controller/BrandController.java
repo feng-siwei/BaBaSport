@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.feng.core.bean.product.Brand;
 import com.feng.core.service.product.BrandService;
 
 import cn.itcast.common.page.Pagination;
@@ -25,7 +26,7 @@ public class BrandController {
 	
 	@Autowired
  	private BrandService brandService ;
-	//查询
+	//根据条件分页查询
 	@RequestMapping(value="/list.do")
 	public String list(String name ,Integer isDisplay,Integer pageNo,Model model){
 		isDisplay = (isDisplay == null ) ? 1 : isDisplay;
@@ -38,5 +39,12 @@ public class BrandController {
 		
 		model.addAttribute("isDisplay", isDisplay);
 		return "brand/list";
+	}
+	//去修改页面
+	@RequestMapping(value="/toEdit.do")
+	public String toEdit(Long id,Model model){
+		Brand brand =  brandService.selectBrandById(id);//快捷键 接收对象 shift+alt+L
+		model.addAttribute("brand", brand);
+		return "brand/edit";
 	}
 }

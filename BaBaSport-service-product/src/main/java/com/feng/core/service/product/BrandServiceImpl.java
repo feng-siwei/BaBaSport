@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.feng.core.bean.product.Brand;
 import com.feng.core.bean.product.BrandQuery;
 import com.feng.core.dao.product.BrandDao;
 
@@ -53,6 +54,11 @@ public class BrandServiceImpl implements BrandService {
 
 		
 		return pagination;
+	}
+	//id→品牌
+	@Override
+	public Brand selectBrandById(Long id) {
+		return brandDao.selectBrandById(id);
 	}
 
 }

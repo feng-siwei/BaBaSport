@@ -38,4 +38,13 @@
 			</if>
 		</where>
 	</select>
+	
+	<!-- 通过ID查询 -->
+	<select id="selectBrandById" parameterType="Long" resultMap="brandMap">
+		SELECT id,name,description,img_url,sort,is_display 
+		FROM bbs_brand 
+		<where>
+			id =#{id}
+		</where>
+	</select>
 </mapper>
