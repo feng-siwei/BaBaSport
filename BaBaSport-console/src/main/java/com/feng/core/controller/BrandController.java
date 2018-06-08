@@ -28,13 +28,14 @@ public class BrandController {
 	//查询
 	@RequestMapping(value="/list.do")
 	public String list(String name ,Integer isDisplay,Integer pageNo,Model model){
+		isDisplay = (isDisplay == null ) ? 1 : isDisplay;
 		
 		Pagination pagination = brandService.selectPaginationByquery(name, isDisplay, pageNo);
 		
 		model.addAttribute("pagination", pagination);
 		model.addAttribute("name", name);
 		
-		isDisplay = (isDisplay == null ) ? 1 : isDisplay;
+		
 		model.addAttribute("isDisplay", isDisplay);
 		return "brand/list";
 	}

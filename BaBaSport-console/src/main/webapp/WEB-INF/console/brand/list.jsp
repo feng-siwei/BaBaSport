@@ -19,7 +19,7 @@
 品牌名称: <input type="text" name="name" value="${name}"/>
 	<select name="isDisplay">
 		<option value="1" <c:if test="${isDisplay == 1 }">selected="selected"</c:if> >是</option>
-		<option value="0" <c:if test="${isDisplay == 1 }">selected="selected"</c:if> >否</option>
+		<option value="0" <c:if test="${isDisplay == 0 }">selected="selected"</c:if> >否</option>
 	</select>
 	<input type="submit" class="query" value="查询"/>
 </form>
@@ -60,27 +60,9 @@
 </table>
 <div class="page pb15">
 	<span class="r inb_a page_b">
-	
-		<font size="2">首页</font>
-	
-		<font size="2">上一页</font>
-	
-		<strong>1</strong>
-	
-		<a href="/product/list.do?&amp;isShow=0&amp;pageNo=2">2</a>
-	
-		<a href="/product/list.do?&amp;isShow=0&amp;pageNo=3">3</a>
-	
-		<a href="/product/list.do?&amp;isShow=0&amp;pageNo=4">4</a>
-	
-		<a href="/product/list.do?&amp;isShow=0&amp;pageNo=5">5</a>
-	
-		<a href="/product/list.do?&amp;isShow=0&amp;pageNo=2"><font size="2">下一页</font></a>
-	
-		<a href="/product/list.do?&amp;isShow=0&amp;pageNo=5"><font size="2">尾页</font></a>
-	
-		共<var>5</var>页 到第<input type="text" size="3" id="PAGENO"/>页 <input type="button" onclick="javascript:window.location.href = '/product/list.do?&amp;isShow=0&amp;pageNo=' + $('#PAGENO').val() " value="确定" class="hand btn60x20" id="skip"/>
-	
+		<c:forEach items="${pagination.pageView }" var="page">
+			${page }
+		</c:forEach>
 	</span>
 </div>
 <div style="margin-top:15px;"><input class="del-button" type="button" value="删除" onclick="optDelete();"/></div>

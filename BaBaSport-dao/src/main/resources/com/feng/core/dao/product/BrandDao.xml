@@ -14,10 +14,10 @@
 		FROM bbs_brand 
 		<where>
 			<if test="name !=null">
-				name like "%"#{name}"%";
+				name like "%"#{name}"%"
 			</if>
 			<if test="isDisplay !=null">
-				AND is_display = #{isDisplay};
+				AND is_display = #{isDisplay}
 			</if>
 		</where>
 		<if test="startRow != null">
@@ -31,10 +31,10 @@
 		FROM bbs_brand 
 		<where>
 			<if test="name !=null">
-				name like "%"#{name}"%";
+				name like "%"#{name}"%" 
 			</if>
 			<if test="isDisplay !=null">
-				AND is_display = #{isDisplay};
+				AND is_display = #{isDisplay}
 			</if>
 		</where>
 	</select>
