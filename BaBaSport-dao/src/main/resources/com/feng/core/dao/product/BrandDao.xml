@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.feng.core.dao.product.BrandDao">
+	
+	<resultMap type="brand" id="brandMap">
+		<result column="img_url" property="imgUrl"/>
+		<result column="is_display" property="isDisplay"/>
+	</resultMap>
+	
+	<!-- 查询 -->
+	<select id="selectBrandListByQuery" parameterType="brandQuery" resultMap="brandMap">
+		SELECT id,name,description,img_url,sort,is_display 
+		FROM bbs_brand 
+		<where>
+			<if test="name !=null">
+				name like "%"#{name}"%";
+			</if>
+			<if test="isDisplay !=null">
+				AND is_display = #{isDisplay};
+			</if>
+		</where>
+		<if test="startRow != null">
+			LIMIT #{startRow},#{pageSize}
+		</if>
+	</select>
+	
+	<!-- 查询符合条件的总数量 -->
+	<select id="selectCount" parameterType="BrandQuery" resultType="Integer">
+		SELECT COUNT(1)
+		FROM bbs_brand 
+		<where>
+			<if test="name !=null">
+				name like "%"#{name}"%";
+			</if>
+			<if test="isDisplay !=null">
+				AND is_display = #{isDisplay};
+			</if>
+		</where>
+	</select>
+</mapper>
