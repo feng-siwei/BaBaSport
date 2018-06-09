@@ -10,7 +10,7 @@ public interface BrandService {
 	 * @param name 品牌名称 支持模糊查询
 	 * @param isDisplay 是否可用
 	 * @param pageNo 当前页数
-	 * @return
+	 * @return 分页集合
 	 */
 	public Pagination selectPaginationByquery(String name , Integer isDisplay,Integer pageNo); 
 	
@@ -20,4 +20,11 @@ public interface BrandService {
 	 * @return
 	 */
 	public Brand selectBrandById(Long id);
+	
+	/**
+	 * 修改
+	 * @param brand
+	 * @return
+	 */
+	public void updateBrandById(Brand brand);
 }

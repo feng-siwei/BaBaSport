@@ -60,5 +60,12 @@ public class BrandServiceImpl implements BrandService {
 	public Brand selectBrandById(Long id) {
 		return brandDao.selectBrandById(id);
 	}
+	//修改
+	@Override
+	public void updateBrandById(Brand brand) {
+		
+		brandDao.updateBrandById(brand);
+		
+	}
 
 }
