@@ -27,4 +27,10 @@ public interface BrandService {
 	 * @return
 	 */
 	public void updateBrandById(Brand brand);
+	
+	/**
+	 * 批量删除
+	 * @param ids 批量删除的id数组
+	 */
+	public void deletes(Long [] ids);
 }

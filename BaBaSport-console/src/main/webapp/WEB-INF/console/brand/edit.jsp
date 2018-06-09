@@ -12,7 +12,7 @@ function uploadPic() {
 			type : "post",
 			success : function(data){
 				$("#allUrl").attr("src",data.url);
-				$("#imgurl").val(data.url);
+				$("#imgUrl").val(data.url);
 			}
 			
 	}

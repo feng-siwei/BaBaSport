@@ -54,4 +54,13 @@ public class BrandController {
 		brandService.updateBrandById(brand);
 		return"redirect:/brand/list.do";
 	}
+	
+	//批量删除/deletes.do
+	@RequestMapping(value="/deletes.do")
+	public String deletes(Long[] ids) { 
+		if (ids != null) {
+			brandService.deletes(ids);			
+		}
+		return"forward:/brand/list.do";
+	}
 }

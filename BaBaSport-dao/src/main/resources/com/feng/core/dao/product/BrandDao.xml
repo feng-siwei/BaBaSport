@@ -72,4 +72,14 @@
 		</where>
 	</update>
 	
+	<!-- 删除 -->
+	<delete id="deletes" parameterType="Long">
+		delete from bbs_brand
+		<where>
+			id in
+			<foreach collection="array" item="id" separator="," open="(" close=")">
+				#{id}
+			</foreach>
+		</where>
+	</delete>
 </mapper>
