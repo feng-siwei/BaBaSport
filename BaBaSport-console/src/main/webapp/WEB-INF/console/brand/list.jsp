@@ -38,8 +38,8 @@ function optDelete(name,isDisplay,pageNo) {
 <form action="/brand/list.do" method="post" style="padding-top:5px;">
 品牌名称: <input type="text" name="name" value="${name}"/>
 	<select name="isDisplay">
-		<option value="1" <c:if test="${isDisplay == 1 }">selected="selected"</c:if> >是</option>
-		<option value="0" <c:if test="${isDisplay == 0 }">selected="selected"</c:if> >否</option>
+		<option value="1" <c:if test="${isDisplay }">selected="selected"</c:if> >是</option>
+		<option value="0" <c:if test="${!isDisplay }">selected="selected"</c:if> >否</option>
 	</select>
 	<input type="submit" class="query" value="查询"/>
 </form>
@@ -72,8 +72,8 @@ function optDelete(name,isDisplay,pageNo) {
 				<td align="center">${brand.description }</td>
 				<td align="center">${brand.sort }</td>
 				<td align="center">
-					<c:if test="${isDisplay == 1 }">是</c:if>
-					<c:if test="${isDisplay == 0 }">否</c:if>
+					<c:if test="${isDisplay }">是</c:if>
+					<c:if test="${!isDisplay }">否</c:if>
 				</td>
 				<td align="center">
 				<a class="pn-opt" href="/brand/toEdit.do?id=${brand.id }">修改</a> | <a class="pn-opt" onclick="if(!confirm('您确定删除吗？')) {return false;}" href="#">删除</a>

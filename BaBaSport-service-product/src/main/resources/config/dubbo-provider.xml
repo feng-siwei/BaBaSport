@@ -33,6 +33,7 @@
 		<!-- 4.暴露实现类 -->
 		<dubbo:service interface="com.feng.core.service.product.BrandService" ref="brandService"/>
 		<dubbo:service interface="com.feng.core.service.product.UploadService" ref="uploadService"/>
+		<dubbo:service interface="com.feng.core.service.product.ProductService" ref="productService"/>
 		
 		
 </beans>

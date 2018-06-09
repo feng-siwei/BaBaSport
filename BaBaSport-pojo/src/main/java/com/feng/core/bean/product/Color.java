@@ -2,7 +2,7 @@ package com.feng.core.bean.product;
 
 import java.io.Serializable;
 
-public class Brand implements Serializable {
+public class Color implements Serializable {
     /**
      * ID
      */
@@ -14,29 +14,14 @@ public class Brand implements Serializable {
     private String name;
 
     /**
-     * 描述
+     * 父ID为色系
      */
-    private String description;
+    private Long parentId;
 
     /**
-     * 图片Url
+     * 颜色对应的衣服小图
      */
     private String imgUrl;
-
-    /**
-     * 品牌网址
-     */
-    private String webSite;
-
-    /**
-     * 排序:最大最排前
-     */
-    private Integer sort;
-
-    /**
-     * 是否可见 1:可见 0:不可见
-     */
-    private Boolean isDisplay;
 
     private static final long serialVersionUID = 1L;
 
@@ -56,12 +41,12 @@ public class Brand implements Serializable {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getDescription() {
-        return description;
+    public Long getParentId() {
+        return parentId;
     }
 
-    public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
     public String getImgUrl() {
@@ -72,30 +57,6 @@ public class Brand implements Serializable {
         this.imgUrl = imgUrl == null ? null : imgUrl.trim();
     }
 
-    public String getWebSite() {
-        return webSite;
-    }
-
-    public void setWebSite(String webSite) {
-        this.webSite = webSite == null ? null : webSite.trim();
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
-    }
-
-    public Boolean getIsDisplay() {
-        return isDisplay;
-    }
-
-    public void setIsDisplay(Boolean isDisplay) {
-        this.isDisplay = isDisplay;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -104,11 +65,8 @@ public class Brand implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
-        sb.append(", description=").append(description);
+        sb.append(", parentId=").append(parentId);
         sb.append(", imgUrl=").append(imgUrl);
-        sb.append(", webSite=").append(webSite);
-        sb.append(", sort=").append(sort);
-        sb.append(", isDisplay=").append(isDisplay);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

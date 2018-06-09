@@ -1,6 +1,9 @@
 package com.feng.core.service.product;
 
+import java.util.List;
+
 import com.feng.core.bean.product.Brand;
+import com.feng.core.bean.product.BrandQuery;
 
 import cn.itcast.common.page.Pagination;
 
@@ -12,7 +15,20 @@ public interface BrandService {
 	 * @param pageNo 当前页数
 	 * @return 分页集合
 	 */
-	public Pagination selectPaginationByquery(String name , Integer isDisplay,Integer pageNo); 
+	public Pagination selectPaginationByquery(String name , Boolean isDisplay,Integer pageNo); 
+	
+	/**
+	 * 根据条件 查找品牌
+	 * @param id
+	 * @return
+	 */
+	public List<Brand> selectBrandByQuery(BrandQuery brandQuery);
+	
+	/**
+	 * 查询可用品牌
+	 * @return
+	 */
+	public List<Brand> selectDisplayBrand();
 	
 	/**
 	 * 更具ID查找品牌
@@ -30,7 +46,8 @@ public interface BrandService {
 	
 	/**
 	 * 批量删除
-	 * @param ids 批量删除的id数组
+	 * @param ids 批量删除的id list
+	 * 
 	 */
-	public void deletes(Long [] ids);
+	public void deletes(List<Long> ids);
 }

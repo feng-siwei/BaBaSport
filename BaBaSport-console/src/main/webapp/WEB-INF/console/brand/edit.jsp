@@ -71,8 +71,8 @@ function uploadPic() {
 				<tr>
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						是否可用:</td><td width="80%" class="pn-fcontent">
-						<input type="radio" name="isDisplay" value="1" <c:if test="${brand.isDisplay == 1  }"> checked="checked" </c:if>/>可用
-						<input type="radio" name="isDisplay" value="0" <c:if test="${brand.isDisplay == 0  }">checked="checked"</c:if>/>不可用
+						<input type="radio" name="isDisplay" value="1" <c:if test="${brand.isDisplay }"> checked="checked" </c:if>/>可用
+						<input type="radio" name="isDisplay" value="0" <c:if test="${!brand.isDisplay }">checked="checked"</c:if>/>不可用
 					</td>
 				</tr>
 			</tbody>

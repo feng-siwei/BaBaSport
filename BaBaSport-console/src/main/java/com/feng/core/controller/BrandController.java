@@ -1,5 +1,7 @@
 package com.feng.core.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,8 +30,8 @@ public class BrandController {
  	private BrandService brandService ;
 	//根据条件分页查询
 	@RequestMapping(value="/list.do")
-	public String list(String name ,Integer isDisplay,Integer pageNo,Model model){
-		isDisplay = (isDisplay == null ) ? 1 : isDisplay;
+	public String list(String name ,Boolean isDisplay,Integer pageNo,Model model){
+		isDisplay = (isDisplay == null ) ? true : isDisplay;
 		
 		Pagination pagination = brandService.selectPaginationByquery(name, isDisplay, pageNo);
 		
@@ -57,7 +59,7 @@ public class BrandController {
 	
 	//批量删除/deletes.do
 	@RequestMapping(value="/deletes.do")
-	public String deletes(Long[] ids) { 
+	public String deletes(List<Long> ids) { 
 		if (ids != null) {
 			brandService.deletes(ids);			
 		}
