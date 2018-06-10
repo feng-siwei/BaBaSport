@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.feng.core.bean.product.Brand;
+import com.feng.core.bean.product.Color;
 import com.feng.core.service.product.BrandService;
 import com.feng.core.service.product.ProductService;
 
@@ -21,7 +22,7 @@ public class ProductController {
 	@Autowired
 	private BrandService brandService;
 	
-	
+	//查询分页
 	@RequestMapping(value="/list.do")
 	public String list(Integer pageNo, String name, Long brandId, Boolean isShow,Model model){
 		
@@ -38,6 +39,19 @@ public class ProductController {
 		model.addAttribute("brands", brands);
 	
 		return "product/list";
+	}
+	
+	//去商品添加页面
+	@RequestMapping(value="/toAdd.do")
+	public String list(Model model){
+		//颜色集合
+		List<Color> colors = productService.selectColorList();
+		model.addAttribute("colors", colors);
+		//品牌集合
+		List<Brand> brands = brandService.selectDisplayBrand();
+		model.addAttribute("brands", brands);
+		
+		return"product/add";
 	}
 	
 }

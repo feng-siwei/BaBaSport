@@ -1,5 +1,9 @@
 package com.feng.core.service.product;
 
+import java.util.List;
+
+import com.feng.core.bean.product.Color;
+
 import cn.itcast.common.page.Pagination;
 
 public interface ProductService {
@@ -12,4 +16,9 @@ public interface ProductService {
 	 * @return
 	 */
 	public Pagination selectPaginationByQuery(Integer pageNo,String name ,Long brandId,Boolean isShow);
+	/**
+	 * 加载颜色集合
+	 * @return
+	 */
+	public List<Color> selectColorList() ;
 }

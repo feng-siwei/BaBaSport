@@ -7,9 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.feng.core.bean.product.Color;
+import com.feng.core.bean.product.ColorQuery;
 import com.feng.core.bean.product.Product;
 import com.feng.core.bean.product.ProductQuery;
 import com.feng.core.bean.product.ProductQuery.Criteria;
+import com.feng.core.dao.product.ColorDao;
 import com.feng.core.dao.product.ProductDao;
 
 import cn.itcast.common.page.Pagination;
@@ -21,6 +24,8 @@ public class ProductServiceImpl implements ProductService{
 
 	@Autowired
 	private ProductDao productDao;
+	@Autowired
+	private ColorDao colorDao;
 	
 	//分页
 	@Override
@@ -48,7 +53,9 @@ public class ProductServiceImpl implements ProductService{
 			criteria.andIsShowEqualTo(false);
 			params.append("&isShow=").append(false);
 		}
-
+		//倒序
+		productQuery.setOrderByClause("id DESC");
+		
 		List<Product> products = productDao.selectByExample(productQuery);
 		int count = productDao.countByExample(productQuery);
 		Pagination pagination = new Pagination(
@@ -56,8 +63,19 @@ public class ProductServiceImpl implements ProductService{
 				productQuery.getPageSize(), 
 				count,
 				products);
+		//分页展示
+		String url = "/product/list.do";
+		
+		pagination.pageView(url, params.toString());
 		
 		return pagination;
 	}
-
+	
+	//加载颜色集合
+	public List<Color> selectColorList() {
+		ColorQuery colorQuery = new ColorQuery();
+		colorQuery.createCriteria().andParentIdNotEqualTo(0L);		
+		return colorDao.selectByExample(colorQuery);
+	}
+	
 }
