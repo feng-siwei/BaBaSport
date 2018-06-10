@@ -3,6 +3,7 @@ package com.feng.core.service.product;
 import java.util.List;
 
 import com.feng.core.bean.product.Color;
+import com.feng.core.bean.product.Product;
 
 import cn.itcast.common.page.Pagination;
 
@@ -21,4 +22,10 @@ public interface ProductService {
 	 * @return
 	 */
 	public List<Color> selectColorList() ;
+	
+	/**
+	 * 添加商品
+	 * @param product
+	 */
+	public void insertProduct(Product product);
 }

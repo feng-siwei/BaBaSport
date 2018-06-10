@@ -3,8 +3,13 @@ package com.feng.core.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 
 import com.feng.common.web.Constants;
 import com.feng.core.service.product.UploadService;
@@ -64,6 +70,36 @@ public class UploadController {
 		}
 		return urls;
 		
+	}
+	
+	/**
+	 * 上传富文本格式图片
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/upload/uploadFck.do")
+	public void uploadFck(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		//无敌版接收
+		//强转spring 的MultipartRequest
+		MultipartRequest mr =  (MultipartRequest) request;
+		Map<String, MultipartFile> fileMep = mr.getFileMap();
+		Set<Entry<String, MultipartFile>> entrySet = fileMep.entrySet(); 
+		for (Entry<String, MultipartFile> entry : entrySet) {
+			MultipartFile pic = entry.getValue();
+			
+			String path =  uploadService.uploadPic(pic.getBytes(), pic.getOriginalFilename(), pic.getSize());
+			
+			String url = Constants.IMG_URL+path;
+			
+			JSONObject jo = new JSONObject();
+			jo.put("error", 0);
+			jo.put("url", url);
+			
+			response.setContentType("application/json;charset=utf-8");
+			response.getWriter().write(jo.toString());
+			
+		}
 	}
 	
 }

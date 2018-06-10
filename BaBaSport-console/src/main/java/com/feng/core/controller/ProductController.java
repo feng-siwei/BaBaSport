@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.feng.core.bean.product.Brand;
 import com.feng.core.bean.product.Color;
+import com.feng.core.bean.product.Product;
 import com.feng.core.service.product.BrandService;
 import com.feng.core.service.product.ProductService;
 
@@ -53,5 +54,14 @@ public class ProductController {
 		
 		return"product/add";
 	}
+	
+	//添加商品
+	@RequestMapping(value="/add.do")
+	public String add(Product product){
+		productService.insertProduct(product);
+		
+		return "redirect:/product/list.do";
+	}
+	
 	
 }

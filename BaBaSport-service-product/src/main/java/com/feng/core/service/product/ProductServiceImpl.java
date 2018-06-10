@@ -1,5 +1,6 @@
 package com.feng.core.service.product;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,24 +13,26 @@ import com.feng.core.bean.product.ColorQuery;
 import com.feng.core.bean.product.Product;
 import com.feng.core.bean.product.ProductQuery;
 import com.feng.core.bean.product.ProductQuery.Criteria;
+import com.feng.core.bean.product.Sku;
 import com.feng.core.dao.product.ColorDao;
 import com.feng.core.dao.product.ProductDao;
+import com.feng.core.dao.product.SkuDao;
 
 import cn.itcast.common.page.Pagination;
 
 @Service("productService")
 @Transactional
-@RequestMapping(value="/product")
 public class ProductServiceImpl implements ProductService{
 
 	@Autowired
 	private ProductDao productDao;
 	@Autowired
 	private ColorDao colorDao;
+	@Autowired
+	private SkuDao skuDao;
 	
 	//分页
 	@Override
-	@RequestMapping(value="/list.do")
 	public Pagination selectPaginationByQuery(Integer pageNo, String name, Long brandId, Boolean isShow) {
 		ProductQuery productQuery = new ProductQuery();
 		//分页
@@ -77,5 +80,59 @@ public class ProductServiceImpl implements ProductService{
 		colorQuery.createCriteria().andParentIdNotEqualTo(0L);		
 		return colorDao.selectByExample(colorQuery);
 	}
+
+	
+	//商品保存
+	public void insertProduct(Product product){
+		//保存商品
+		//下架状态 后台程序写的
+		product.setIsShow(false);
+		//删除  后台程序写的不删除
+		product.setIsDel(true);
+		//时间
+		product.setCreateTime(new Date());
+		
+		productDao.insertSelective(product);
+		//返回ID
+		//保存SKU
+		String[] colors = product.getColors().split(",");
+		String[] sizes = product.getSizes().split(",");
+		//颜色
+		for (String color : colors) {
+			for (String size : sizes) {
+				//保存SKU
+				Sku sku = new Sku();
+				//商品ＩＤ
+				sku.setProductId(product.getId());
+				//颜色
+				sku.setColorId(Long.parseLong(color));
+				//尺码
+				sku.setSize(size);
+				//市场价
+				sku.setMarketPrice(999f);
+				//售价
+				sku.setPrice(666f);
+				//运费
+				sku.setDeliveFee(8f);
+				//库存
+				sku.setStock(0);
+				//限制
+				sku.setUpperLimit(200);
+				//时间
+				sku.setCreateTime(new Date());
+
+				skuDao.insertSelective(sku);
+
+			}
+		}
+
+
+
+
+	}
+
+	
+	
+	
 	
 }
