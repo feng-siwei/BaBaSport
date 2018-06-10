@@ -19,6 +19,7 @@ import com.feng.core.dao.product.ProductDao;
 import com.feng.core.dao.product.SkuDao;
 
 import cn.itcast.common.page.Pagination;
+import redis.clients.jedis.Jedis;
 
 @Service("productService")
 @Transactional
@@ -30,6 +31,8 @@ public class ProductServiceImpl implements ProductService{
 	private ColorDao colorDao;
 	@Autowired
 	private SkuDao skuDao;
+	@Autowired
+	private Jedis jedis;
 	
 	//分页
 	@Override
@@ -85,6 +88,9 @@ public class ProductServiceImpl implements ProductService{
 	//商品保存
 	public void insertProduct(Product product){
 		//保存商品
+		Long id = jedis.incr("pno");
+		product.setId(id);
+		
 		//下架状态 后台程序写的
 		product.setIsShow(false);
 		//删除  后台程序写的不删除
