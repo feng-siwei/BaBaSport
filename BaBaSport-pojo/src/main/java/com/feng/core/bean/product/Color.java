@@ -22,8 +22,10 @@ public class Color implements Serializable {
      * 颜色对应的衣服小图
      */
     private String imgUrl;
-
-    private static final long serialVersionUID = 1L;
+    
+	private static final long serialVersionUID = 1L;
+    
+    
 
     public Long getId() {
         return id;
@@ -57,6 +59,8 @@ public class Color implements Serializable {
         this.imgUrl = imgUrl == null ? null : imgUrl.trim();
     }
 
+
+    
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

@@ -137,6 +137,22 @@ public class ProductServiceImpl implements ProductService{
 
 	}
 
+	//商品上架
+	@Override
+	public void isShow(Long[] ids) {
+		Product product = new Product();
+		product.setIsShow(true);
+		for (Long id : ids) {
+			//商品状态变更
+			product.setId(id);
+			productDao.updateByPrimaryKeySelective(product);
+			//TODO 保存到solr服务器
+			
+			//TODO 静态化 
+		}
+		
+	}
+
 	
 	
 	

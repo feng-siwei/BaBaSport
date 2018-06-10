@@ -14,12 +14,12 @@ function isShow(){
 		alert("请至少选择一个");
 		return;
 	}
-	//你确定删除吗
+	//确定
 	if(!confirm("你确定上架吗")){
 		return;
 	}
 	//提交 Form表单
-	$("#jvForm").attr("action","/brand/isShow.do");
+	$("#jvForm").attr("action","/product/isShow.do");
 	$("#jvForm").attr("method","post");
 	$("#jvForm").submit();
 	
@@ -70,7 +70,7 @@ function isShow(){
 			<td><input type="checkbox" name="ids" value="${product.id }"/></td>
 			<td>${product.id }</td>
 			<td align="center">${product.name }</td>
-			<td align="center"><img width="50" height="50" src="${product.imgUrl }"/></td>
+			<td align="center"><img width="50" height="50" src="${product.images[0] }"/></td>
 			<td align="center">是</td>
 			<td align="center">是</td>
 			<td align="center">是</td>
@@ -79,7 +79,7 @@ function isShow(){
 				<c:if test="${!isShow}">下架</c:if>
 			</td>
 			<td align="center">
-			<a href="#" class="pn-opt">查看</a> | <a href="#" class="pn-opt">修改</a> | <a href="#" onclick="if(!confirm('您确定删除吗？')) {return false;}" class="pn-opt">删除</a> | <a href="../sku/list.jsp" class="pn-opt">库存</a>
+			<a href="#" class="pn-opt">查看</a> | <a href="#" class="pn-opt">修改</a> | <a href="#" onclick="if(!confirm('您确定删除吗？')) {return false;}" class="pn-opt">删除</a> | <a href="/sku/list.do?productId=${product.id}" class="pn-opt">库存</a>
 			</td>
 		</tr>
 	</c:forEach>

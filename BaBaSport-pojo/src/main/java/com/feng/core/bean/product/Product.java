@@ -80,6 +80,15 @@ public class Product implements Serializable {
     private Date createTime;
 
     private static final long serialVersionUID = 1L;
+    
+    //取出图片集合的单张图片(第一张)
+    public String[] getImages() {
+    	if (imgUrl!=null) {
+    		return imgUrl.split(",");
+		}
+    	return null;
+	}
+    
 
     public Long getId() {
         return id;

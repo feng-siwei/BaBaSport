@@ -49,9 +49,27 @@ public class Sku implements Serializable {
      */
     private Integer upperLimit;
 
+    /**
+     * 创建时间
+     */
     private Date createTime;
+    
 
-    private static final long serialVersionUID = 1L;
+    /**
+     * 颜色对象,非数据库数据
+     */
+    private Color color;
+    
+
+    public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
+	private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;
