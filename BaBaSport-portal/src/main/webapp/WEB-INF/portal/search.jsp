@@ -268,7 +268,7 @@ function login(){
 			</div>
 <div id="J_goodsList" class="goods-list-v1 gl-type-1 J-goods-list">
 	<ul class="gl-warp clearfix" data-tpl="1">
-		<c:forEach items="${pagination.list }" var="product">
+		<c:forEach items="${products }" var="product">
 		<li data-sku="1711416562" class="gl-item">
 			<div class="gl-i-wrap">
 				<div class="p-img">
@@ -287,7 +287,7 @@ function login(){
 				</div>
 				<div class="p-price">
 					<strong class="J_1711416562">
-						<em>￥</em><i>${product.price }</i>
+						<em>￥</em><i>${product.minPrice }</i>
 					</strong>						
 					<div class="p-icons" id="J_pro_1711416562">
 						<i class="icons" title="购买本商品送赠品">赠品</i>

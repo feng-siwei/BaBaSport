@@ -81,16 +81,27 @@ public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    //取出图片集合的单张图片(第一张)
+    //取出图片集合数组
     public String[] getImages() {
     	if (imgUrl!=null) {
     		return imgUrl.split(",");
 		}
     	return null;
 	}
+    //最低价格
+    private Float minPrice;
+   
     
 
-    public Long getId() {
+    public Float getMinPrice() {
+		return minPrice;
+	}
+
+	public void setMinPrice(Float minPrice) {
+		this.minPrice = minPrice;
+	}
+
+	public Long getId() {
         return id;
     }
 
