@@ -17,23 +17,23 @@ var price = '${param.price}';
 var brandId = '${param.brandId}';
 //搜索
 function serachKeyword(){
-	window.location.href = "/product/list?keyword=" + $("#keyword").val();
+	window.location.href = "/search?keyword=" + $("#keyword").val();
 }
 //点击 品牌   id == 品牌ID
 function fqBrand(id){
 	//判断是否有价格
 	if(price != ''){
-		window.location.href = "/product/list?keyword=" + keyword + "&brandId=" + id + "&price=" + price;
+		window.location.href = "/search?keyword=" + keyword + "&brandId=" + id + "&price=" + price;
 	}else{
-		window.location.href = "/product/list?keyword=" + keyword + "&brandId=" + id;
+		window.location.href = "/search?keyword=" + keyword + "&brandId=" + id;
 	}
 }
 //点击价格 id == 价格区间
 function fqPrice(id){
 	if(brandId != ''){
-		window.location.href = "/product/list?keyword=" + keyword + "&brandId=" + brandId + "&price=" + id;
+		window.location.href = "/search?keyword=" + keyword + "&brandId=" + brandId + "&price=" + id;
 	}else{
-		window.location.href = "/product/list?keyword=" + keyword + "&price=" + id;
+		window.location.href = "/search?keyword=" + keyword + "&price=" + id;
 	}
 }
 

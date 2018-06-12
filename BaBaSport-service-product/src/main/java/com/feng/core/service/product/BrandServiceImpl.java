@@ -1,6 +1,10 @@
 package com.feng.core.service.product;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +15,7 @@ import com.feng.core.bean.product.BrandQuery;
 import com.feng.core.dao.product.BrandDao;
 
 import cn.itcast.common.page.Pagination;
+import redis.clients.jedis.Jedis;
 
 @Service("brandService")
 @Transactional
@@ -18,6 +23,8 @@ public class BrandServiceImpl implements BrandService {
 
 	@Autowired
 	private BrandDao brandDao;
+	@Autowired
+	private Jedis jedis;
 	//查询品牌分页对象
 	@Override
 	public Pagination selectPaginationByquery(String name, Boolean isDisplay, Integer pageNo) {
@@ -64,6 +71,8 @@ public class BrandServiceImpl implements BrandService {
 	//修改
 	@Override
 	public void updateBrandById(Brand brand) {
+		//修改时储存Redis
+		jedis.hset("brand", String.valueOf(brand.getId()), brand.getName());
 		
 		brandDao.updateByPrimaryKey(brand);
 		
@@ -81,11 +90,29 @@ public class BrandServiceImpl implements BrandService {
 	public List<Brand> selectBrandByQuery(BrandQuery brandQuery) {
 		return brandDao.selectByExample(brandQuery);
 	}
+	//查找可用品牌
 	@Override
 	public List<Brand> selectDisplayBrand() {
 		BrandQuery brandQuery = new BrandQuery();
 		brandQuery.createCriteria().andIsDisplayEqualTo(true);
 		return brandDao.selectByExample(brandQuery);
+	}
+	
+	//从Redis数据库中查询品牌
+	@Override
+	public List<Brand> selectBrandListFromRedis() {
+		List<Brand> brands = new ArrayList<>();
+		
+		Map<String, String> brandMap = jedis.hgetAll("brand");
+		Set<Entry<String, String>> brandSet = brandMap.entrySet();
+		for (Entry<String, String> brandEntry : brandSet) {
+			Brand brand = new Brand();
+			brand.setId(Long.parseLong(brandEntry.getKey()));
+			brand.setName(brandEntry.getValue());
+			brands.add(brand);
+		}
+		
+		return brands;
 	}
 
 }

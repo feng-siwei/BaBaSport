@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.text.Highlighter.Highlight;
-
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrQuery.ORDER;
 import org.apache.solr.client.solrj.SolrServer;
@@ -31,7 +29,7 @@ public class SearchServuceImpl implements SearchServuce {
 	private SolrServer solrServer;
 	
 	@Override
-	public Pagination selectPaginationByQuery(String keyword,Integer pageNo) throws Exception{
+	public Pagination selectPaginationByQuery(String keyword,Integer pageNo, Long brandId, String price) throws Exception{
 		//创建分页包装类
 		ProductQuery productQuery =new ProductQuery();
 		//当前页
@@ -48,6 +46,24 @@ public class SearchServuceImpl implements SearchServuce {
 		SolrQuery solrQuery = new SolrQuery();
 		//关键词
 		solrQuery.set("q", "name_ik:"+keyword);
+		//过滤条件
+		//商品品牌
+		if (null != brandId) {
+			solrQuery.addFilterQuery("brandId:"+brandId);
+			
+		}
+		//价格
+		if (null != price) {
+			String[] p = price.split("-");
+			if (p.length == 2) {
+				solrQuery.addFilterQuery("price:["+ p[0] +" TO "+ p[1] +"]");
+			}else {
+				solrQuery.addFilterQuery("price:["+ p[0] +" TO *]");				
+				
+			}
+			
+		}
+		
 		//分页
 		solrQuery.setStart(productQuery.getStartRow());
 		solrQuery.setRows(productQuery.getPageSize());
@@ -91,12 +107,12 @@ public class SearchServuceImpl implements SearchServuce {
 			String url = (String) doc.get("url");
 			product.setImgUrl(url);
 			//价格销售
-			Float price = (Float) doc.get("price");
-			product.setMinPrice(price);
+			Float minPrice = (Float) doc.get("price");
+			product.setMinPrice(minPrice);
 			//品牌ID long
-			Integer brandId  = (Integer) doc.get("brandId");
-			if (brandId != null) {
-				product.setBrandId(brandId.longValue());
+			Integer brandIntId  = (Integer) doc.get("brandId");
+			if (brandIntId != null) {
+				product.setBrandId(brandIntId.longValue());
 			}
 				
 			

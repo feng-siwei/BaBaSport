@@ -50,4 +50,10 @@ public interface BrandService {
 	 * 
 	 */
 	public void deletes(List<Long> ids);
+
+	/**
+	 * 从Redis数据库中查询可用品牌id与名称
+	 * @return
+	 */
+	public List<Brand> selectBrandListFromRedis();
 }
