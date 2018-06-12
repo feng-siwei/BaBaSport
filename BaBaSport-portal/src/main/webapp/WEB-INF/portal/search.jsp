@@ -268,7 +268,7 @@ function login(){
 			</div>
 <div id="J_goodsList" class="goods-list-v1 gl-type-1 J-goods-list">
 	<ul class="gl-warp clearfix" data-tpl="1">
-		<c:forEach items="${products }" var="product">
+		<c:forEach items="${pagination.list }" var="product">
 		<li data-sku="1711416562" class="gl-item">
 			<div class="gl-i-wrap">
 				<div class="p-img">

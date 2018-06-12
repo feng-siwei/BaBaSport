@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.feng.core.bean.product.Product;
 import com.feng.core.service.SearchServuce;
 
+import cn.itcast.common.page.Pagination;
+
 @Controller
 public class ProductController {
 	@Autowired
@@ -24,9 +26,9 @@ public class ProductController {
 	
 	//搜索
 	@RequestMapping(value = "/search")
-	public String index(String keyword ,Model model) throws Exception {
-		List<Product> products = searchServuce.selectProducListByQuery(keyword);
-		model.addAttribute("products", products);
+	public String index(String keyword ,Integer pageNo,Model model) throws Exception {
+		Pagination pagination  = searchServuce.selectPaginationByQuery(keyword,pageNo);
+		model.addAttribute("pagination", pagination);
 		return "search";
 	}
 }

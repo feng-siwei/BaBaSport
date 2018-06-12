@@ -23,7 +23,7 @@ function serachKeyword(){
 				<ul id="shelper" class="hide">
 				</ul>
 				<div class="form">
-					<input type="text" class="text" id="keyword" value="2016">
+					<input type="text" class="text" id="keyword" value="${param.keyword }">
 					<input type="button" value="搜索" class="button" onclick="serachKeyword()" >
 				</div>
 			</div>

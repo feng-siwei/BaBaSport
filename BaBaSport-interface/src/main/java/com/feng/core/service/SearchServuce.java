@@ -1,8 +1,7 @@
 package com.feng.core.service;
 
-import java.util.List;
 
-import com.feng.core.bean.product.Product;
+import cn.itcast.common.page.Pagination;
 
 public interface SearchServuce {
 	/**
@@ -11,5 +10,5 @@ public interface SearchServuce {
 	 * @return
 	 * @throws Exception 
 	 */
-	public List<Product> selectProducListByQuery(String keyword) throws Exception ;
+	public Pagination selectPaginationByQuery(String keyword,Integer pageNo) throws Exception ;
 }
