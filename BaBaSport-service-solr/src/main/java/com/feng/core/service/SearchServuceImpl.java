@@ -1,5 +1,6 @@
 package com.feng.core.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -7,14 +8,20 @@ import java.util.Map;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrQuery.ORDER;
 import org.apache.solr.client.solrj.SolrServer;
+import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
+import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.feng.core.bean.product.Product;
 import com.feng.core.bean.product.ProductQuery;
+import com.feng.core.bean.product.Sku;
+import com.feng.core.bean.product.SkuQuery;
+import com.feng.core.dao.product.ProductDao;
+import com.feng.core.dao.product.SkuDao;
 
 import cn.itcast.common.page.Pagination;
 
@@ -27,6 +34,10 @@ import cn.itcast.common.page.Pagination;
 public class SearchServuceImpl implements SearchServuce {
 	@Autowired
 	private SolrServer solrServer;
+	@Autowired
+	private ProductDao productDao;
+	@Autowired
+	private SkuDao skuDao;
 	
 	@Override
 	public Pagination selectPaginationByQuery(String keyword,Integer pageNo, Long brandId, String price) throws Exception{
@@ -131,5 +142,40 @@ public class SearchServuceImpl implements SearchServuce {
 		
 		return pagination;
 	}
+	
+	//保存商品信息到Solr服务器
+	public void insertProductToSolr(Long id) {
+		
+		SolrInputDocument doc = new SolrInputDocument();
+		Product p = productDao.selectByPrimaryKey(id);
+		//商品ID
+		doc.setField("id", id);
+		//图片
+		doc.setField("url", p.getImages()[0]);
+		//商品名称
+		doc.setField("name_ik", p.getName());
+		//价格
+		 SkuQuery skuQuery = new SkuQuery();
+		 skuQuery.createCriteria().andProductIdEqualTo(id);
+		 skuQuery.setOrderByClause("price asc");
+		 skuQuery.setPageNo(1);
+		 skuQuery.setPageSize(1);
+		 skuQuery.setFields("price");
+		 List<Sku> skus = skuDao.selectByExample(skuQuery);
+		 doc.setField("price", skus.get(0).getPrice());
+		 //品牌ID
+		 doc.setField("brandId", p.getBrandId());
+		 
+		 
+		try {
+			solrServer.add(doc);
+			solrServer.commit();
+		} catch (SolrServerException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
 
 }

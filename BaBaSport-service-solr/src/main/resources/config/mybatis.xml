@@ -19,9 +19,19 @@
    		http://www.springframework.org/schema/task/spring-task-4.0.xsd
 		http://code.alibabatech.com/schema/dubbo        
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-		
-		<!-- 扫描注解 -->
-		<context:component-scan base-package="com.feng"/>
+	
+	<!-- SqlSessionFactory工厂 -->	
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 数据源 -->
+		<property name="dataSource" ref="dataSource"/>
+		<!-- 配置Mybatis核心配置文件 -->
+		<property name="configLocation" value="classpath:mybatis-config.xml"/>
+	</bean>
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 扫描的包 -->
+		<property name="basePackage" value="com.feng.core.dao"/>
+	</bean>
 		
 		
 	

@@ -20,10 +20,7 @@
 		http://code.alibabatech.com/schema/dubbo        
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 		
-		<!-- 扫描注解 -->
-		<context:component-scan base-package="com.feng"/>
+		<!-- 数据源,事物,扫描,mybatis,ActiceMQ.Freemarker,redis,solr -->
+		<import resource="config/*.xml"/>
 		
-		
-	
-
-</beans>		
+</beans>

@@ -20,10 +20,31 @@
 		http://code.alibabatech.com/schema/dubbo        
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 		
-		<!-- 扫描注解 -->
-		<context:component-scan base-package="com.feng"/>
-		
-		
+	<!-- ActiveMQ配置 -->	
+	<bean id="activeMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<!-- 设置链接 -->
+		<property name="brokerURL" value="tcp://192.168.200.128:61616"/>
+		<!-- 用户名密码 -->
+		<property name="userName" value="admin"/>
+		<property name="password" value="admin"/>
+	</bean>
+	<!-- 链接池 -->
+	<bean id="pooledConnectionFactoryBean" class="org.apache.activemq.pool.PooledConnectionFactoryBean">
+		<property name="connectionFactory" ref="activeMQConnectionFactory"/>
+		<!-- 最大连接数 -->
+		<property name="maxConnections" value="2"/>
+	</bean>
 	
-
+	<!-- spring管理上面的工厂 -->
+	<bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+		<property name="targetConnectionFactory" ref="pooledConnectionFactoryBean"/>
+	</bean>
+	
+	<!-- JmsTemplate 由spring提供 -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory"/>
+		<!-- 默认目标 -->
+		<property name="defaultDestinationName" value="productId"></property>
+	</bean>
+		
 </beans>		

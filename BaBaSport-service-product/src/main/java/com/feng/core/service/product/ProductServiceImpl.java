@@ -4,10 +4,16 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
+
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,7 +44,7 @@ public class ProductServiceImpl implements ProductService{
 	@Autowired
 	private Jedis jedis;
 	@Autowired
-	private SolrServer solrServer;
+	private JmsTemplate jmsTemplate;
 	
 	//分页
 	@Override
@@ -148,39 +154,24 @@ public class ProductServiceImpl implements ProductService{
 	public void isShow(Long[] ids) {
 		Product product = new Product();
 		product.setIsShow(true);
-		for (Long id : ids) {
+		
+		
+		
+		for (final Long id : ids) {
 			//商品状态变更
 			product.setId(id);
 			productDao.updateByPrimaryKeySelective(product);
 			
-			//保存到solr服务器
-			SolrInputDocument doc = new SolrInputDocument();
-			Product p = productDao.selectByPrimaryKey(id);
-			//商品ID
-			doc.setField("id", id);
-			//图片
-			doc.setField("url", p.getImages()[0]);
-			//商品名称
-			doc.setField("name_ik", p.getName());
-			//价格
-			 SkuQuery skuQuery = new SkuQuery();
-			 skuQuery.createCriteria().andProductIdEqualTo(id);
-			 skuQuery.setOrderByClause("price asc");
-			 skuQuery.setPageNo(1);
-			 skuQuery.setPageSize(1);
-			 skuQuery.setFields("price");
-			 List<Sku> skus = skuDao.selectByExample(skuQuery);
-			 doc.setField("price", skus.get(0).getPrice());
-			 //品牌ID
-			 doc.setField("brandId", p.getBrandId());
-			 
-			 
-			try {
-				solrServer.add(doc);
-				solrServer.commit();
-			} catch (SolrServerException | IOException e) {
-				e.printStackTrace();
-			}
+			//发送消息到ActiveMQ中
+//			jmsTemplate.send("brandId", messageCreator); 
+			jmsTemplate.send(new MessageCreator() {
+				
+				@Override
+				public Message createMessage(Session session) throws JMSException {
+					
+					return session.createTextMessage(String.valueOf(id));
+				}
+			});
 			//TODO 静态化 
 		}
 		

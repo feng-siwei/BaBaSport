@@ -14,4 +14,6 @@ public interface SearchServuce {
 	 * @throws Exception 
 	 */
 	public Pagination selectPaginationByQuery(String keyword,Integer pageNo, Long brandId, String price) throws Exception ;
+
+	public void insertProductToSolr(Long id);
 }
