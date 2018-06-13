@@ -28,13 +28,10 @@
 		<!-- 集群设置 <dubbo:registry address="192.168.200.128:2181,192.168.200.129:2181,192.168.200.130:2181" protocol="zookeeper" /> -->
 		<!-- 暂时采用直连 -->
 		<dubbo:registry address="N/A"  check="false"/>
-		<!-- 3.dubbo://192.168.**:20880 默认 设置提供服务端口号 以区分在同一服务器上的不同服务提供方 -->
-		<dubbo:protocol port="20880" name="dubbo" />
+		<!-- 3.dubbo://192.168.**:20880 默认 设置提供服务端口号 以区分在同一服务器上的不同服务提供方 后面的name是协议名称-->
+		<dubbo:protocol port="20882" name="dubbo" />
 		<!-- 4.暴露实现类 -->
-		<dubbo:service interface="com.feng.core.service.product.BrandService" ref="brandService"/>
-		<dubbo:service interface="com.feng.core.service.product.UploadService" ref="uploadService"/>
-		<dubbo:service interface="com.feng.core.service.product.ProductService" ref="productService"/>
-		<dubbo:service interface="com.feng.core.service.product.SkuService" ref="skuService"/>
+		<dubbo:service interface="com.feng.core.service.CmsService" ref="cmsService"/>
 		
 		
 </beans>

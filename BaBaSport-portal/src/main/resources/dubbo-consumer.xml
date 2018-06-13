@@ -44,6 +44,11 @@
 		<dubbo:reference interface="com.feng.core.service.SearchServuce" id="searchServuce"
 			url="dubbo://127.0.0.1:20881" 
 		/>
+		<!-- 内容管理服务 -->		
+		<dubbo:reference interface="com.feng.core.service.CmsService" id="cmsService"
+			url="dubbo://127.0.0.1:20882" 
+		/>
+		
 		<!-- 全局设置 -->
 		<dubbo:consumer timeout="600000" check="false"></dubbo:consumer>
 </beans>

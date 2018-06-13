@@ -1,9 +1,11 @@
 package com.feng.core.controller;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.feng.core.bean.product.Brand;
+import com.feng.core.bean.product.Color;
+import com.feng.core.bean.product.Product;
+import com.feng.core.bean.product.Sku;
+import com.feng.core.service.CmsService;
 import com.feng.core.service.SearchServuce;
 import com.feng.core.service.product.BrandService;
 
@@ -23,7 +29,9 @@ public class ProductController {
 	private SearchServuce searchServuce;
 	@Autowired
 	private BrandService brandService;
-	
+	@Autowired
+	private CmsService cmsService;
+
 	//首页
 	@RequestMapping(value = "/index.do")
 	public String index(Model model) {
@@ -68,5 +76,24 @@ public class ProductController {
 		model.addAttribute("map", map);
 		
 		return "search";
+	}
+
+	//去商品详情页面
+	@RequestMapping(value="/product/detail")
+	public String detail(Long id , Model model){
+		//商品
+		Product product = cmsService.selectProductById(id);
+		//sku
+		List<Sku> skus = cmsService.selectSkuListByProductId(id);
+		//颜色集合
+		Set<Color> colors = new HashSet<>();
+		for (Sku sku : skus) {
+			colors.add(sku.getColor());
+		}
+		
+		model.addAttribute("product", product);
+		model.addAttribute("skus", skus);
+		model.addAttribute("colors", colors);
+		return "product";
 	}
 }

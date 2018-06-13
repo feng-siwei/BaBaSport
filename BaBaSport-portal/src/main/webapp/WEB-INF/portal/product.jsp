@@ -197,7 +197,7 @@ function addCart(){
 			<div id="choose-color" class="li choose-color-shouji p-choose">
 				<div class="dt">选择颜色：</div>
 				<div class="dd" id="colors">
-				  <c:forEach items="${colors }" var="color">
+				  <c:forEach items="${colors}" var="color">
 					<div class="item" onclick="colorToRed(this,'${color.id}')">
 						<b></b>
 						<a href="javascript:;" title="${color.name }" >

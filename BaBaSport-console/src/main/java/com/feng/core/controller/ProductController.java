@@ -23,6 +23,7 @@ public class ProductController {
 	@Autowired
 	private BrandService brandService;
 	
+	
 	//查询分页
 	@RequestMapping(value="/list.do")
 	public String list(Integer pageNo, String name, Long brandId, Boolean isShow,Model model){
@@ -70,6 +71,8 @@ public class ProductController {
 		
 		return "forward:/product/list.do";
 	}
+	
+	
 	
 	
 }
