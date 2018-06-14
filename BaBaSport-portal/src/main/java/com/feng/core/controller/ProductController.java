@@ -51,7 +51,7 @@ public class ProductController {
 		//回显条件
 		model.addAttribute("brandId", brandId);
 		model.addAttribute("price", price);
-		model.addAttribute("keyword", keyword);
+		
 		
 		//已选条件容器 Map 回显上方选择条
 		Map<String, String>map = new LinkedHashMap<>();

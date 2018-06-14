@@ -22,32 +22,16 @@
 		
 		<!-- Dubbo消费方 -->
 		<!-- 1.名称 计算机 区别 唯一 -->
-		<dubbo:application name="babasport-portal"/>
+		<dubbo:application name="babasport-login"/>
 		<!-- 2.设置注册中心 地址 zookeeper在哪里 -->
 		<!-- <dubbo:registry address="192.168.200.128:2181" protocol="zookeeper" /> -->
 		<!-- 集群设置 <dubbo:registry address="192.168.200.128:2181,192.168.200.129:2181,192.168.200.130:2181" protocol="zookeeper" /> -->
 		<dubbo:registry address="N/A" check="false"/>
 		<!-- 3.调用接口 -->
-		<dubbo:reference interface="com.feng.core.service.product.BrandService" id="brandService"
-			url="dubbo://127.0.0.1:20880" 
+		<dubbo:reference interface="com.feng.core.service.user.BuyerService" id="buyerService"
+			url="dubbo://127.0.0.1:20883" 
 		/>
-		<dubbo:reference interface="com.feng.core.service.product.UploadService" id="uploadService"
-			url="dubbo://127.0.0.1:20880" 
-		/>
-		<dubbo:reference interface="com.feng.core.service.product.ProductService" id="productService"
-			url="dubbo://127.0.0.1:20880" 
-		/>
-		<dubbo:reference interface="com.feng.core.service.product.SkuService" id="skuService"
-			url="dubbo://127.0.0.1:20880" 
-		/>
-		<!-- 搜索服务 -->		
-		<dubbo:reference interface="com.feng.core.service.SearchServuce" id="searchServuce"
-			url="dubbo://127.0.0.1:20881" 
-		/>
-		<!-- 内容管理服务 -->		
-		<dubbo:reference interface="com.feng.core.service.CmsService" id="cmsService"
-			url="dubbo://127.0.0.1:20882" 
-		/>
+		
 		
 		<!-- 全局设置 -->
 		<dubbo:consumer timeout="600000" check="false"></dubbo:consumer>

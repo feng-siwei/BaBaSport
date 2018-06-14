@@ -37,7 +37,7 @@ public class StaticPageServiceImpl implements StaticPageService, ServletContextA
 		String path = getPath("/html/product/" + id + ".html");	
 		
 		File f = new File(path);
-		//目录创建
+		//目录父对象是否存在
 		File parentFile = f.getParentFile();
 		if(!parentFile.exists()){      
 			parentFile.mkdirs();
