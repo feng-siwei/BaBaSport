@@ -36,8 +36,9 @@ window.pageConfig = {
 		HM : '0'
 	}
 };
+//触发器
 $(function(){
-	//
+	//初始化加载
 	$("#colors a:first").trigger("click");
 });
 //全局变量
@@ -203,7 +204,7 @@ function addCart(){
 						<a href="javascript:;" title="${color.name }" >
 						<img data-img="1"
 							src="/images/53f44cc2N0b714cb2_002.jpg"
-							alt="灰色三件套" height="25" width="25"><i>${color.name }</i></a>
+							alt="灰色三件套" height="25" width="25"><i>${ color.name }</i></a>
 					</div>
 				  </c:forEach>
 				</div>

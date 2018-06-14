@@ -44,7 +44,9 @@
 	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory" ref="connectionFactory"/>
 		<!-- 默认目标 -->
-		<property name="defaultDestinationName" value="productId"></property>
+		<property name="defaultDestinationName" value="productId"/>
+		<!-- 默认点对点消息模式false / true 订阅发布模式 -->
+		<property name="pubSubDomain" value="true"/>
 	</bean>
 		
 </beans>		

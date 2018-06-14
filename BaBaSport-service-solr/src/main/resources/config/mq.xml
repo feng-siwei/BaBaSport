@@ -58,6 +58,8 @@
 		<property name="destinationName" value="productId"/>
 		<!-- 消息处理回调类 -->
 		<property name="messageListener" ref="customMessageListener"/>
+		<!-- 默认点对点 改为订阅模式 -->
+		<property name="pubSubDomain" value="true"></property>
 	</bean>
 	
 		

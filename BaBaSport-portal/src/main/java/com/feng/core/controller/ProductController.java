@@ -1,12 +1,10 @@
 package com.feng.core.controller;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -53,6 +51,8 @@ public class ProductController {
 		//回显条件
 		model.addAttribute("brandId", brandId);
 		model.addAttribute("price", price);
+		model.addAttribute("keyword", keyword);
+		
 		//已选条件容器 Map 回显上方选择条
 		Map<String, String>map = new LinkedHashMap<>();
 		//品牌

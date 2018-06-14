@@ -46,5 +46,21 @@
 		<!-- 默认目标 -->
 		<property name="defaultDestinationName" value="productId"></property>
 	</bean>
+	
+	<!-- 消息处理类 -->
+	<bean id="customMessageListener" class="com.feng.core.message.CustomMessageListener"></bean>
+	
+	<!-- Spring监听器 监听ActiveMQ中是否有消息 -->
+	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<!-- 链接上ActiveMQ -->
+		<property name="connectionFactory" ref="connectionFactory"/>
+		<!-- 监听目标 -->
+		<property name="destinationName" value="productId"/>
+		<!-- 消息处理回调类 -->
+		<property name="messageListener" ref="customMessageListener"/>
+		<!-- 默认点对点 改为订阅模式 -->
+		<property name="pubSubDomain" value="true"></property>
+	</bean>
+	
 		
 </beans>		
