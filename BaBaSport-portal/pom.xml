@@ -9,20 +9,20 @@
   <packaging>war</packaging>
   
   <!-- 依赖管理 -->
-  <!-- BaBaSport-interface -->
-  <dependencies>
-  	<dependency>
-  		<groupId>com.feng.babasport</groupId>
-	    <artifactId>BaBaSport-interface</artifactId>
-	    <version>0.0.1-SNAPSHOT</version>
-  	</dependency>
-  </dependencies>
-  
-  <!-- tomcat7 servlet-api -->
+	<!-- BaBaSport-interface -->
+	<dependencies>
+		<dependency>
+			<groupId>com.feng.babasport</groupId>
+			<artifactId>BaBaSport-interface</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+
+		<!-- tomcat7 servlet-api -->
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-jsp-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-  
+	</dependencies>
 </project>

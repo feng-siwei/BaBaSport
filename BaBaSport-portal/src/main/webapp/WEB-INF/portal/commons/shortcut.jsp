@@ -17,7 +17,7 @@ $(function(){
 			}
 		}
 	});
-})
+})  
 //登入页面
 function login(){
 	window.location.href = "http://localhost:8081/login.aspx?returnUrl="+encodeURIComponent(window.location.href);
