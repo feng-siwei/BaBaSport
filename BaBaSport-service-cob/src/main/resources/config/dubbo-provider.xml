@@ -32,6 +32,7 @@
 		<dubbo:protocol port="20883" name="dubbo" />
 		<!-- 4.暴露实现类 -->
 		<dubbo:service interface="com.feng.core.service.user.BuyerService" ref="buyerService"/>
+		<dubbo:service interface="com.feng.core.service.user.SessionProvider" ref="sessionProvider"/>
 		
 		
 		

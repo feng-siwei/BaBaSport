@@ -74,6 +74,7 @@ public class ProductServiceImpl implements ProductService{
 		//倒序
 		productQuery.setOrderByClause("id DESC");
 		
+		
 		List<Product> products = productDao.selectByExample(productQuery);
 		int count = productDao.countByExample(productQuery);
 		Pagination pagination = new Pagination(

@@ -3,11 +3,13 @@ package com.feng.core.service.user;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.feng.core.bean.user.Buyer;
 import com.feng.core.bean.user.BuyerQuery;
 import com.feng.core.dao.user.BuyerDao;
 
+@Service("buyerService")
 public class BuyerServiceImpl implements BuyerService {
 	
 	@Autowired
