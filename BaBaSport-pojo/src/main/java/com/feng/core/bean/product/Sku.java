@@ -4,7 +4,23 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Sku implements Serializable {
+	
+	
+	/**
+	 * 附加值部分
+     * 颜色对象,非数据库数据
+     */
+    private Color color;
+	
     /**
+     * 商品对象,非数据库数据
+     */
+    private Product product;
+	
+	
+  
+
+	/**
      * ID
      */
     private Long id;
@@ -55,11 +71,14 @@ public class Sku implements Serializable {
     private Date createTime;
     
 
-    /**
-     * 颜色对象,非数据库数据
-     */
-    private Color color;
     
+    public Product getProduct() {
+  		return product;
+  	}
+
+  	public void setProduct(Product product) {
+  		this.product = product;
+  	}
 
     public Color getColor() {
 		return color;

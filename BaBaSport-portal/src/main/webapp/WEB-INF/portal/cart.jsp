@@ -97,12 +97,15 @@ function trueBuy(){
 									<span class="price"> ¥${item.sku.price} </span>
 								</div>
 								<div class="cell p-promotion"></div>
-								<div class="cell p-inventory stock-11345721">有货</div>
+								<div class="cell p-inventory stock-11345721">
+									<c:if test="${item.isHave }">有货</c:if>
+									<c:if test="${!item.isHave }">无货</c:if>
+								</div>
 								<div class="cell p-quantity" for-stock="for-stock-11345721">
 									<div class="quantity-form">
-										<a href="javascript:void(0);" class="decrement">-</a> <input
-											value="${item.amount }" type="text" class="quantity-text">
-											<a href="javascript:void(0);" class="increment">+</a>
+										<a href="javascript:void(0);" class="decrement">-</a> 
+										<input value="${item.amount }" type="text" class="quantity-text">
+										<a href="javascript:void(0);" class="increment">+</a>
 									</div>
 								</div>
 								<div class="cell p-remove">
@@ -114,7 +117,7 @@ function trueBuy(){
 
 				</div>
 				<!-- product-list结束 -->
-				<div class="cart-toolbar clearfix">
+				<%-- <div class="cart-toolbar clearfix">
 					<div class="total fr">
 						<p>
 							<span class="totalSkuPrice">¥${buyerCart.productPrice }</span>商品金额：
@@ -126,7 +129,7 @@ function trueBuy(){
 					<div class="amout fr">
 						<span id="selectedCount">${buyerCart.productAmount }</span> 件商品
 					</div>
-				</div>
+				</div> --%>
 				<div class="ui-ceilinglamp-1" style="width: 988px; height: 49px;">
 					<div class="cart-dibu ui-ceilinglamp-current"
 						style="width: 988px; height: 49px;">
@@ -144,9 +147,9 @@ function trueBuy(){
 									<a class="checkout" onclick="trueBuy()">去结算<b></b></a>
 								</span>
 							</div>
-							<div class="total fr">
+							<%-- <div class="total fr">
 								总计： <span class="totalSkuPrice">¥${buyerCart.totalPrice }</span>
-							</div>
+							</div> --%>
 						</div>
 					</div>
 				</div>

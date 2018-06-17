@@ -16,7 +16,7 @@ public interface Constants {
 	public static final String USER_NAME = "USER_NAME";
 	
 	/**
-	 * 购物车 保存在Cookie中的名字
+	 * 购物车 保存在Cookies和redis中的前缀
 	 */
 	public static final String BUYER_CART = "BUYER_CART";	
 }

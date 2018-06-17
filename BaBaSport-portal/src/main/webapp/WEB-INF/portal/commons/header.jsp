@@ -37,7 +37,7 @@ function serachKeyword(){
 					<span class="shopping">
 						<span id="shopping-amount">3</span>
 					</span>
-					<a href="/cart/cart.html" id="settleup-url">去购物车结算</a>
+					<a href="/toCart" id="settleup-url">去购物车结算</a>
 				</dt>
 <!-- 				<dd>
 					<div class="prompt">

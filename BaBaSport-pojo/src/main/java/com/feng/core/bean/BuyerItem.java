@@ -1,5 +1,7 @@
 package com.feng.core.bean;
 
+import java.io.Serializable;
+
 import com.feng.core.bean.product.Sku;
 
 /**
@@ -7,7 +9,8 @@ import com.feng.core.bean.product.Sku;
  * @author 冯思伟
  *
  */
-public class BuyerItem {
+public class BuyerItem implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private Sku sku;
 	//是否有货
 	private Boolean isHave = true;
