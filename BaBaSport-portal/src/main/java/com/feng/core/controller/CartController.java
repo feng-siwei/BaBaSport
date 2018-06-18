@@ -18,8 +18,10 @@ import com.feng.common.utils.RequestUtils;
 import com.feng.common.web.Constants;
 import com.feng.core.bean.BuyerCart;
 import com.feng.core.bean.BuyerItem;
+import com.feng.core.bean.order.Order;
 import com.feng.core.bean.product.Sku;
 import com.feng.core.service.product.SkuService;
+import com.feng.core.service.user.BuyerService;
 import com.feng.core.service.user.SessionProvider;
 
 @Controller
@@ -29,6 +31,9 @@ public class CartController {
 	private SkuService skuService;
 	@Autowired
 	private SessionProvider sessionProvider;
+	@Autowired
+	private BuyerService buyerService;
+	
 	
 	//加入购物车
 	@RequestMapping(value = "/addCart")
@@ -130,7 +135,7 @@ public class CartController {
 			//登入
 			if (null != buyerCart) {
 				//将当前购物车添加到redis中,防止用户登入后直接在购物车页面进行刷新,导致cokie中的数据丢失
-				skuService.insertBuyerCartToRedis(buyerCart, username);
+				buyerService.insertBuyerCartToRedis(buyerCart, username);
 				//清理之前的coolies
 				Cookie cookie = new Cookie(Constants.BUYER_CART , null);
 				cookie.setMaxAge(0);
@@ -139,7 +144,7 @@ public class CartController {
 			}
 			
 			//从redis取出购物车
-			buyerCart = skuService.selectBuyerCartFromRedis(username);
+			buyerCart = buyerService.selectBuyerCartFromRedis(username);
 		}
 		
 		//数据回显
@@ -164,7 +169,7 @@ public class CartController {
 		//获得用户名
 		String username = sessionProvider.getAttribuerForUsername(RequestUtils.getCSESSIONID(request, response));
 		//从redis取出购物车
-		BuyerCart buyerCart = skuService.selectBuyerCartFromRedis(username);
+		BuyerCart buyerCart = buyerService.selectBuyerCartFromRedis(username);
 		List<BuyerItem> items = buyerCart.getItems();
 		//缺货标识
 		Boolean flag = false;
@@ -189,5 +194,14 @@ public class CartController {
 		}
 
 		return "order";
+	}
+
+	//结算
+	@RequestMapping(value = "/buyer/submitOrder")
+	public String submitOrder(Order order,Model model, 
+			HttpServletRequest request , HttpServletResponse response) throws Exception {
+				
+		 
+		return null;
 	}
 }
