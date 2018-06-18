@@ -1,6 +1,5 @@
 package com.feng.core.controller;
 
-import java.io.IOException;
 import java.io.StringWriter;
 import java.util.List;
 
@@ -14,8 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.feng.common.utils.RequestUtils;
 import com.feng.common.web.Constants;
@@ -72,19 +69,19 @@ public class CartController {
 		
 		
 		//用户是否登入
-		String username = sessionProvider.getAttribuerForUsername(RequestUtils.getCSESSIONID(request, response));
-		if (null != username) {
-			//登入用户将购物车储存到redis
-
-			//将当前购物车添加到redis中
-			skuService.insertBuyerCartToRedis(buyerCart, username);
-			//清理之前的coolies
-			Cookie cookie = new Cookie(Constants.BUYER_CART , null);
-			cookie.setMaxAge(0);
-			cookie.setPath("/");
-			response.addCookie(cookie);
-	
-		}else{
+//		String username = sessionProvider.getAttribuerForUsername(RequestUtils.getCSESSIONID(request, response));
+//		if (null != username) {
+//			//登入用户将购物车储存到redis
+//
+//			//将当前购物车添加到redis中
+//			skuService.insertBuyerCartToRedis(buyerCart, username);
+//			//清理之前的coolies
+//			Cookie cookie = new Cookie(Constants.BUYER_CART , null);
+//			cookie.setMaxAge(0);
+//			cookie.setPath("/");
+//			response.addCookie(cookie);
+//	
+//		}else{
 			//非登入用户将购物车储存到cookies
 			
 			//创建Cookie 放入购物车
@@ -99,7 +96,7 @@ public class CartController {
 //			cookie.setDomain(".XXX.com");
 			//保存写回浏览器
 			response.addCookie(cookie);
-		}
+//		}
 		
 		
 		return "redirect:/toCart";   

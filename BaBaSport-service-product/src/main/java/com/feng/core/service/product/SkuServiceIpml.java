@@ -68,9 +68,18 @@ public class SkuServiceIpml implements SkuService {
 		List<BuyerItem> items = buyerCart.getItems();
 		if (items.size()>0) {
 			for (BuyerItem buyerItem : items) {
-				jedis.hset(Constants.BUYER_CART+":"+username, 
-						String.valueOf(buyerItem.getSku().getId()),
-						String.valueOf(buyerItem.getAmount()));
+				//判断是否存在
+//				if (jedis.hexists(Constants.BUYER_CART+":"+username, 
+//						String.valueOf(buyerItem.getSku().getId()))) {
+					//存在追加
+					jedis.hincrBy(Constants.BUYER_CART+":"+username, 
+							String.valueOf(buyerItem.getSku().getId()), 
+							buyerItem.getAmount());
+//				}else {
+//					jedis.hset(Constants.BUYER_CART+":"+username, 
+//							String.valueOf(buyerItem.getSku().getId()),
+//							String.valueOf(buyerItem.getAmount()));					
+//				}
 			}
 		}
 	}

@@ -23,9 +23,18 @@ public class BuyerCart implements Serializable {
 	
 	
 	
-	
+	/**
+	 * 添加购物项到购物车中
+	 * @param item
+	 */
 	public void addItem(BuyerItem item){
-		items.add(item);
+		//判断同款
+		int index = items.indexOf(item);
+		if( index > -1){
+			 items.get(index).setAmount( items.get(index).getAmount()+item.getAmount());
+		}else{
+			items.add(item);
+		}
 	}
 	public List<BuyerItem> getItems() {
 		return items;
