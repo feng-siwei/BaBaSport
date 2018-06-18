@@ -26,6 +26,7 @@ function checkAll(checked){
 }
 //结算
 function trueBuy(){
+	 
 	$("#jvForm").submit();
 }
 </script>
@@ -117,7 +118,7 @@ function trueBuy(){
 
 				</div>
 				<!-- product-list结束 -->
-				<%-- <div class="cart-toolbar clearfix">
+				<div class="cart-toolbar clearfix">
 					<div class="total fr">
 						<p>
 							<span class="totalSkuPrice">¥${buyerCart.productPrice }</span>商品金额：
@@ -129,7 +130,7 @@ function trueBuy(){
 					<div class="amout fr">
 						<span id="selectedCount">${buyerCart.productAmount }</span> 件商品
 					</div>
-				</div> --%>
+				</div>
 				<div class="ui-ceilinglamp-1" style="width: 988px; height: 49px;">
 					<div class="cart-dibu ui-ceilinglamp-current"
 						style="width: 988px; height: 49px;">
@@ -138,7 +139,7 @@ function trueBuy(){
 						 	<b></b><a href="javascript:void(0);">删除选中的商品</a>
 						</span> 
 						<span class="shopping"> 
-							<b></b><a href="/">继续购物</a>
+							<b></b><a href="/index.do">继续购物</a>
 						</span>
 						</div>
 						<div class="cart-total-2014">
@@ -147,9 +148,9 @@ function trueBuy(){
 									<a class="checkout" onclick="trueBuy()">去结算<b></b></a>
 								</span>
 							</div>
-							<%-- <div class="total fr">
+							<div class="total fr">
 								总计： <span class="totalSkuPrice">¥${buyerCart.totalPrice }</span>
-							</div> --%>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -169,8 +170,8 @@ function trueBuy(){
 					购物车内暂时没有商品，登录后将显示您之前加入的商品
 				</li>
 				<li>
-					<a class="btn-1 login-btn mr10" href="#none">登录</a>
-					<a class="ftx-05" href="/">去购物&gt;</a>
+					<a class="btn-1 login-btn mr10" href="http://localhost:8081/login.aspx?returnUrl=http%3A%2F%2Flocalhost%3A8082%2Findex.do">登录</a>
+					<a class="ftx-05" href="/index.do">去购物&gt;</a>
 				</li>
 			</ul>
 		</div>	

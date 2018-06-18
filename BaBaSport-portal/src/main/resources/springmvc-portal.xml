@@ -34,6 +34,16 @@
 			<property name="prefix" value="/WEB-INF/portal/"/>
 			<property name="suffix" value=".jsp"/>
 		</bean>
+		<!-- spring拦截器 -->
+		<mvc:interceptors>
+			<mvc:interceptor>
+				<!-- 拦截器规则  -->
+				<mvc:mapping path="/buyer/**"/>
+				<!-- 拦截器自定义的类中处理 -->
+				<bean class="com.feng.core.interceptor.CustomInterceptor"/>
+			</mvc:interceptor>
+		</mvc:interceptors>
+		
 		<!-- 加入dubbo配置文件 -->
 		<import resource="dubbo-consumer.xml"/>
 		<!-- 图片上传 -->

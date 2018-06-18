@@ -156,4 +156,38 @@ public class CartController {
 		
 		return "cart";
 	}
+	
+	//结算
+	@RequestMapping(value = "/buyer/trueBuy")
+	public String trueBuy(Long[] skuId,Model model, 
+			HttpServletRequest request , HttpServletResponse response) throws Exception {
+		//获得用户名
+		String username = sessionProvider.getAttribuerForUsername(RequestUtils.getCSESSIONID(request, response));
+		//从redis取出购物车
+		BuyerCart buyerCart = skuService.selectBuyerCartFromRedis(username);
+		List<BuyerItem> items = buyerCart.getItems();
+		//缺货标识
+		Boolean flag = false;
+		if (items.size()>0) {
+			//库存检查
+			for (BuyerItem buyerItem : items) {
+				buyerItem.setSku(skuService.selectSkuByid(buyerItem.getSku().getId()));
+				if (buyerItem.getAmount()>buyerItem.getSku().getStock()) {
+					//缺货
+					buyerItem.setIsHave(false);
+					flag = true;
+				}
+			}
+			//缺货处理
+			if (flag) {
+				model.addAttribute("buyerCart", buyerCart);
+				return "cart";
+			}
+		}else {
+			//购物车为空
+			return "redirect:/toCart";
+		}
+
+		return "order";
+	}
 }
